@@ -1,12 +1,18 @@
 #pragma once
 
 #include "gtest/gtest.h"
-#include "helper/time/timer.hpp"
+#include <chrono>
 
-#define LOG_CNT 100
+#define LOG_MAX_BYTE ((off_t)(1 << 30))
+#define LOG_MAX_OPS 81920
+#define PMEM_ROOT "D:/pmem-fs"
 
-class TimeTest : public testing::Test
-{
+#define GET_TIME_STAMP_US                                                      \
+	std::chrono::duration_cast<std::chrono::microseconds>(                 \
+		std::chrono::system_clock::now().time_since_epoch())           \
+		.count()
+
+class TimeTest : public testing::Test {
 protected:
 	TimeTest()
 	{
